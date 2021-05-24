@@ -1,0 +1,25 @@
+package com.rabbitmq.direct;
+
+import com.rabbitmq.client.*;
+import com.rabbitmq.utils.RabbitMqParam;
+import com.rabbitmq.utils.RabbitMqUtils;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
+
+public class Customer {
+    public static void main(String[] args) throws IOException, TimeoutException {
+        Connection connection = RabbitMqUtils.getConnection();
+        Channel channel = connection.createChannel();
+        channel.exchangeDeclare(RabbitMqParam.EXCHANGE_NAME,"direct");
+        String queue = channel.queueDeclare().getQueue();
+        channel.queueBind(queue,RabbitMqParam.EXCHANGE_NAME,"info");
+
+        channel.basicConsume(queue,true,new DefaultConsumer(channel){
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                System.out.println(new String(body));
+            }
+        });
+    }
+}

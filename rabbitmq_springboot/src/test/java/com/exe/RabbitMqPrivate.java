@@ -26,6 +26,10 @@ public class RabbitMqPrivate {
             rabbitTemplate.convertAndSend("word","word 模型");
         }
     }
+
+    /**
+     * fanout模型
+     */
     @Test
     public void testFanout(){
         rabbitTemplate.convertAndSend("logs","","fanout模型");

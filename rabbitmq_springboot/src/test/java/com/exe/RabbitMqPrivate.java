@@ -17,6 +17,9 @@ public class RabbitMqPrivate {
         rabbitTemplate.convertAndSend("hello","hello word");
     }
 
+    /**
+     * word模型
+     */
     @Test
     public void testWord(){
         for (int i = 0; i < 10; i++) {

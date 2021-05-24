@@ -31,6 +31,9 @@ public class RabbitMqPrivate {
         rabbitTemplate.convertAndSend("logs","","fanout模型");
     }
 
+    /***
+     * direct模型
+     */
     @Test
     public void testDirect(){
         rabbitTemplate.convertAndSend("directs","info","direct模型");

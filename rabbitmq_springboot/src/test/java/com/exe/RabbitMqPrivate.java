@@ -36,6 +36,10 @@ public class RabbitMqPrivate {
         rabbitTemplate.convertAndSend("directs","info","direct模型");
     }
 
+    /**
+     *
+     * topic模型
+     */
     @Test
     public void topic(){
         rabbitTemplate.convertAndSend("topics","user.save.prodect","user.save.prodect，topic模型");
